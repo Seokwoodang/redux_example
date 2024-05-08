@@ -1,17 +1,24 @@
 import { nanoid } from "@reduxjs/toolkit";
+import {
+  AddTodoAction,
+  Todo,
+  TodoAddReturn,
+  TodoToggleReturn,
+  TodoToggledAction,
+} from "./reducerType";
 
-interface AddTodoAction {
-  type: typeof ADD_TODO;
-  payload: {
-    id: string;
-    text: string;
-  };
-}
+// interface AddTodoAction {
+//   type: typeof ADD_TODO;
+//   payload: {
+//     id: string;
+//     text: string;
+//   };
+// }
 
-interface TodoToggledAction {
-  type: typeof TODO_TOGGLED;
-  payload: { id: string }; // Only the ID is needed for toggling
-}
+// interface TodoToggledAction {
+//   type: typeof TODO_TOGGLED;
+//   payload: { id: string }; // Only the ID is needed for toggling
+// }
 
 const ADD_TODO = "ADD_TODO";
 const TODO_TOGGLED = "TODO_TOGGLED";
@@ -25,14 +32,14 @@ export const todoToggled = (id: string): TodoToggledAction => ({
   type: TODO_TOGGLED,
   payload: { id },
 });
+// interface Todo {
+//   id: string;
+//   text: string;
+//   completed: boolean;
+// }
 
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-}
-
-type TodoAction = ReturnType<typeof addTodo> | ReturnType<typeof todoToggled>;
+// type TodoAction = ReturnType<typeof addTodo> | ReturnType<typeof todoToggled>;
+type TodoAction = TodoAddReturn | TodoToggleReturn;
 
 export const todosReducer = (
   state: Todo[] = [],
