@@ -7,6 +7,10 @@ import {
   TodoToggledAction,
 } from "./reducerType";
 
+const initialState = {
+  todoList: [],
+};
+
 const ADD_TODO = "ADD_TODO";
 const TODO_TOGGLED = "TODO_TOGGLED";
 
@@ -22,8 +26,8 @@ export const todoToggled = (id: string): TodoToggledAction => ({
 
 type TodoAction = TodoAddReturn | TodoToggleReturn;
 
-export const todosReducer = (
-  state: Todo[] = [],
+export const todoReducer = (
+  state: Todo[] = initialState.todoList,
   action: TodoAction
 ): Todo[] => {
   switch (action.type) {

@@ -1,56 +1,30 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { RefObject, useRef, useState } from "react";
 import "./App.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "./reducers/todoReducer";
+import { addTodoTest } from "./reducers/todoReducerTest";
+import { AddTodoAction } from "./reducers/reducerType";
 
 function App() {
-  const response = {
-    results: [
-      { title: "lords of ring", id: 1 },
-      { title: "hamlet", id: 2 },
-      { title: "terminal", id: 3 },
-    ],
+  const dispatch = useDispatch();
+  const textRef = useRef<HTMLInputElement | null>(null);
+  const todoList = useSelector((state: any) => state.todoReducer);
+
+  console.log(todoList);
+
+  const handleAddTodo = () => {
+    const text = textRef.current?.value;
+    if (text) dispatch<any>(addTodo(text));
   };
-
-  let movies = response.results;
-
-  // 검색
-  function searchFunction(val = "") {
-    movies = response.results.filter((value) => value.title.includes(val));
-  }
-
-  function searchFunctionReturn(val = "") {
-    return response.results.filter((value) => value.title.includes(val));
-  }
-
-  // console.log(movies);
-  console.log(searchFunctionReturn());
-
-  let ref = "";
-
-  searchFunctionReturn().forEach((value) => {
-    ref = ref + `<div><img src={${value.id}}/></div>`;
-  });
-
-  const show = movies.map((value, index) => {
-    return <div>{value.title}</div>;
-  });
-
-  /** 검색 함수 */
-  // searchFunction();
-
-  // console.log(results);
 
   return (
     <div>
-      <button
-        onClick={() => {
-          searchFunction("ring");
-          console.log(movies);
-        }}
-      >
-        ㅁㅁㅁ
-      </button>
-      {show}
+      <div>Todo List</div>
+      <div>
+        <input ref={textRef} />
+        <button onClick={() => handleAddTodo()}>추가</button>
+      </div>
+      <div></div>
     </div>
   );
 }
