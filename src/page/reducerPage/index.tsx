@@ -1,9 +1,8 @@
-import React, { RefObject, useRef, useState } from "react";
-import "./App.css";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./reducers/todoReducer";
+import { addTodo } from "../../reducers/todoReducer";
 
-function App() {
+const ReducerPage = () => {
   const dispatch = useDispatch();
   const textRef = useRef<HTMLInputElement | null>(null);
   const todoList = useSelector((state: any) => state.todoReducer);
@@ -23,6 +22,6 @@ function App() {
       <div></div>
     </div>
   );
-}
+};
 
-export default App;
+export default ReducerPage;
