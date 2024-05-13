@@ -1,11 +1,19 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "../../reducers/todoReducer";
+import { useNavigate } from "react-router-dom";
 
-const ReducerPage = () => {
+interface TodoItem {
+  id: string;
+  text: string;
+  completed: boolean;
+}
+
+const ReduxPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const textRef = useRef<HTMLInputElement | null>(null);
-  const todoList = useSelector((state: any) => state.todoReducer);
+  const todoList: TodoItem[] = useSelector((state: any) => state.todoReducer);
 
   const handleAddTodo = () => {
     const text = textRef.current?.value;
@@ -19,9 +27,14 @@ const ReducerPage = () => {
         <input ref={textRef} />
         <button onClick={() => handleAddTodo()}>추가</button>
       </div>
-      <div></div>
+      <div>
+        {todoList.map((value, index) => {
+          return <div>{value.text}</div>;
+        })}
+      </div>
+      <button onClick={() => navigate(`/`)}>뒤로가기</button>
     </div>
   );
 };
 
-export default ReducerPage;
+export default ReduxPage;

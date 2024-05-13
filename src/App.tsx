@@ -2,6 +2,11 @@ import React, { RefObject, useRef, useState } from "react";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodo } from "./reducers/todoReducer";
+import { Route, Routes } from "react-router-dom";
+import MainPage from "./page/mainPage";
+import ReduxPage from "./page/reduxPage";
+import RecoilPage from "./page/recoilPage";
+import ZustandPage from "./page/zustandPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,14 +19,12 @@ function App() {
   };
 
   return (
-    <div>
-      <div>Todo List</div>
-      <div>
-        <input ref={textRef} />
-        <button onClick={() => handleAddTodo()}>추가</button>
-      </div>
-      <div></div>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/redux" element={<ReduxPage />} />
+      <Route path="/recoil" element={<RecoilPage />} />
+      <Route path="/zustand" element={<ZustandPage />} />
+    </Routes>
   );
 }
 
