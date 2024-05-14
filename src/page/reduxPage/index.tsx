@@ -28,6 +28,15 @@ const ReduxPage = () => {
         <button onClick={() => handleAddTodo()}>추가</button>
       </div>
       <div>
+        {todoList.map((value) => {
+          return (
+            <>
+              <div></div>
+              <div></div>
+            </>
+          );
+        })}
+
         {todoList.map((value, index) => {
           return <div>{value.text}</div>;
         })}
