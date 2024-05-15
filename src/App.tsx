@@ -12,11 +12,14 @@ function App() {
   const dispatch = useDispatch();
   const textRef = useRef<HTMLInputElement | null>(null);
   const todoList = useSelector((state: any) => state.todoReducer);
+  console.log(todoList);
 
   const handleAddTodo = () => {
     const text = textRef.current?.value;
     if (text) dispatch<any>(addTodo(text));
   };
+
+  handleAddTodo();
 
   return (
     <Routes>
